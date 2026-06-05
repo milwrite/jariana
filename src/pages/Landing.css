@@ -1,0 +1,157 @@
+.landing {
+  min-height: 100%;
+  background: #f4f1ea;
+  color: #16140f;
+  padding: clamp(2rem, 6vw, 6rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3rem, 8vh, 6rem);
+  position: relative;
+  overflow: hidden;
+}
+
+/* faint paper grain / vignette */
+.landing::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 80% at 50% -10%, rgba(0, 0, 0, 0.05), transparent 60%),
+    radial-gradient(100% 60% at 50% 120%, rgba(0, 0, 0, 0.06), transparent 60%);
+  pointer-events: none;
+}
+
+.landing__head {
+  max-width: 46rem;
+  position: relative;
+  animation: rise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.landing__kicker {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  margin: 0 0 1.5rem;
+  color: #8a2d1f;
+}
+
+.landing__title {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: clamp(4rem, 16vw, 13rem);
+  line-height: 0.82;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+
+.landing__dot {
+  color: #8a2d1f;
+}
+
+.landing__sub {
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  line-height: 1.5;
+  max-width: 34rem;
+  margin: 2rem 0 0;
+  color: #46412f;
+}
+
+.landing__doors {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1rem, 3vw, 2.5rem);
+}
+
+.door {
+  position: relative;
+  border-top: 1px solid #16140f;
+  padding: 1.6rem 0 2.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  isolation: isolate;
+  transition: padding-left 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  animation: rise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.door--01 { animation-delay: 0.12s; }
+.door--02 { animation-delay: 0.22s; }
+
+.door::after {
+  content: '';
+  position: absolute;
+  inset: 0 -1.2rem;
+  z-index: -1;
+  background: #ece7db;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.door:hover::after { opacity: 1; }
+.door:hover { padding-left: 1.2rem; }
+
+.door__num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: #8a2d1f;
+}
+
+.door__name {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: clamp(1.6rem, 3.4vw, 2.8rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.door__desc {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #5b5443;
+  max-width: 26rem;
+}
+
+.door__enter {
+  margin-top: 0.4rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #16140f;
+  opacity: 0.45;
+  transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.door:hover .door__enter {
+  opacity: 1;
+  transform: translateX(6px);
+}
+
+.landing__foot {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: #8c8470;
+  text-transform: uppercase;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 720px) {
+  .landing__doors {
+    grid-template-columns: 1fr;
+  }
+}

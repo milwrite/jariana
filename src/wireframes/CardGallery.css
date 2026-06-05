@@ -1,0 +1,221 @@
+.cards {
+  --paper: #f4f1ea;
+  --ink: #16140f;
+  --muted: #6a6353;
+  --accent: #8a2d1f;
+  --line: #d8d2c4;
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 100%;
+  padding: clamp(1.5rem, 5vw, 5rem);
+  padding-bottom: 6rem;
+}
+
+/* ---------- masthead ---------- */
+.cards__masthead {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    'back note'
+    'title title';
+  gap: 1.5rem 2rem;
+  align-items: start;
+  padding-bottom: clamp(2rem, 6vh, 4rem);
+}
+
+.cards__back {
+  grid-area: back;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  align-self: center;
+  transition: color 0.2s ease;
+}
+.cards__back:hover { color: var(--accent); }
+
+.cards__note {
+  grid-area: note;
+  justify-self: end;
+  text-align: right;
+  max-width: 24rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 0;
+}
+
+.cards__title-wrap { grid-area: title; }
+
+.cards__kicker {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 0.6rem;
+}
+
+.cards__title {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: clamp(2.8rem, 10vw, 8rem);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+
+/* ---------- shared plate ---------- */
+.plate {
+  margin: 0;
+  break-inside: avoid;
+  animation: plate-in 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.plate__frame {
+  background: #fff;
+  padding: 0.6rem;
+  border: 1px solid var(--line);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s ease;
+  overflow: hidden;
+}
+.plate__frame img {
+  width: 100%;
+  height: auto;
+  filter: saturate(0.96) contrast(1.02);
+  transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.5s ease;
+}
+.plate:hover .plate__frame {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px -22px rgba(0, 0, 0, 0.5);
+}
+.plate:hover .plate__frame img {
+  transform: scale(1.03);
+  filter: saturate(1.05) contrast(1.04);
+}
+
+/* ---------- placard ---------- */
+.plate__placard {
+  padding: 0.85rem 0.1rem 0;
+}
+.plate__title {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 1.05rem;
+  line-height: 1.15;
+  margin: 0 0 0.25rem;
+}
+.plate__meta {
+  font-size: 0.82rem;
+  color: var(--ink);
+  margin: 0 0 0.35rem;
+}
+.plate__line {
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--muted);
+  margin: 0 0 0.5rem;
+  line-height: 1.35;
+}
+.plate__acc {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #a59c87;
+  margin: 0;
+}
+
+/* ---------- diptych ---------- */
+.diptych {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.2rem, 4vw, 3.5rem);
+  margin-bottom: clamp(3rem, 8vh, 5rem);
+}
+.plate--feature .plate__frame--feature {
+  padding: 1rem;
+}
+.plate--feature .plate__frame--feature img {
+  width: 100%;
+  height: clamp(20rem, 42vh, 34rem);
+  object-fit: cover;
+}
+.plate--feature .plate__title {
+  font-size: clamp(1.4rem, 2.6vw, 2.1rem);
+  font-weight: 400;
+}
+.plate--feature .plate__placard {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    'title title'
+    'meta acc'
+    'line acc';
+  column-gap: 1rem;
+  align-items: baseline;
+}
+.plate--feature .plate__title { grid-area: title; }
+.plate--feature .plate__meta { grid-area: meta; }
+.plate--feature .plate__line { grid-area: line; }
+.plate--feature .plate__acc { grid-area: acc; align-self: end; }
+
+/* ---------- rule between sections ---------- */
+.cards__rule {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-top: 1px solid var(--ink);
+  padding: 0.7rem 0 2rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ---------- masonry ---------- */
+.masonry {
+  column-count: 4;
+  column-gap: clamp(1rem, 2.5vw, 2.2rem);
+}
+.masonry .plate {
+  margin-bottom: clamp(1.6rem, 3.5vw, 2.8rem);
+}
+
+@media (max-width: 1100px) { .masonry { column-count: 3; } }
+@media (max-width: 760px) {
+  .masonry { column-count: 2; }
+  .diptych { grid-template-columns: 1fr; }
+  .cards__masthead {
+    grid-template-columns: 1fr;
+    grid-template-areas: 'back' 'title' 'note';
+  }
+  .cards__note { justify-self: start; text-align: left; }
+}
+@media (max-width: 440px) { .masonry { column-count: 1; } }
+
+/* ---------- footer ---------- */
+.cards__foot {
+  margin-top: clamp(3rem, 8vh, 5rem);
+  border-top: 1px solid var(--line);
+  padding-top: 1.4rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.cards__cta { color: var(--accent); transition: opacity 0.2s ease; }
+.cards__cta:hover { opacity: 0.65; }
+
+@keyframes plate-in {
+  from { opacity: 0; transform: translateY(26px); }
+  to { opacity: 1; transform: translateY(0); }
+}
