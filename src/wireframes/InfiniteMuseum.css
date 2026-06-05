@@ -220,6 +220,58 @@
 .museum__placard-close:hover { color: var(--brass); }
 
 @media (max-width: 640px) {
-  .museum__id-name { font-size: 1.1rem; }
+  .museum__top {
+    padding: calc(env(safe-area-inset-top, 0px) + 1rem) 1rem 0.8rem;
+  }
+  .museum__id-name { font-size: 1.05rem; }
   .museum__count { display: none; }
+  /* drop the long brand eyebrow on phones to keep the header one line tall */
+  .museum__id-num { display: none; }
+
+  /* controls → top-right pill (clears the bottom sheet), 44px touch targets */
+  .museum__controls {
+    top: calc(env(safe-area-inset-top, 0px) + 4.4rem);
+    right: 0.7rem;
+    bottom: auto;
+    flex-direction: row;
+    gap: 0.1rem;
+    padding: 0.25rem 0.35rem;
+  }
+  .museum__controls button {
+    width: 2.75rem;
+    height: 2.75rem;
+    font-size: 1.35rem;
+  }
+  .museum__zoom { padding: 0 0.35rem; }
+  .museum__home {
+    border-top: none !important;
+    border-left: 1px solid rgba(201, 168, 106, 0.2) !important;
+    margin: 0 0 0 0.2rem;
+    padding: 0 0.55rem !important;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+  }
+
+  .museum__hint {
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 1.2rem);
+    font-size: 0.6rem;
+    letter-spacing: 0.16em;
+  }
+
+  /* focused placard → full-width bottom sheet */
+  .museum__placard {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    border-left: none;
+    border-top: 3px solid var(--brass);
+    border-radius: 16px 16px 0 0;
+    padding: 1.2rem 1.3rem calc(env(safe-area-inset-bottom, 0px) + 1.2rem);
+    transform: translateY(100%);
+  }
+  .museum__placard.is-open {
+    transform: translateY(0);
+  }
 }

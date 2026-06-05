@@ -22,12 +22,12 @@ export default function CardGallery() {
       <header className="cards__masthead">
         <Link to="/" className="cards__back">← Lobby</Link>
         <div className="cards__title-wrap">
-          <p className="cards__kicker">Wireframe 01 — Permanent Collection</p>
+          <p className="cards__kicker">Jariana Digital Museum · Gallery I</p>
           <h1 className="cards__title">The Card Gallery</h1>
         </div>
         <p className="cards__note">
-          Selected promotional photography, <em>Malcolm in the Middle</em>, 2000–2006.
-          Hung salon-style. {loading ? 'Hanging the show…' : `${artworks.length} plates on view.`}
+          Placeholder imagery — promotional stills from <em>Malcolm in the Middle</em>, 2000–2006 —
+          hung salon-style. {loading ? 'Hanging the show…' : `${artworks.length} plates on view.`}
         </p>
       </header>
 
@@ -63,7 +63,7 @@ export default function CardGallery() {
       </section>
 
       <footer className="cards__foot">
-        <span>JARIANA · A Museum of the Middle</span>
+        <span>Jariana Digital Museum · Gallery I</span>
         <Link to="/museum" className="cards__cta">See it as an infinite hall →</Link>
       </footer>
     </main>

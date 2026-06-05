@@ -155,17 +155,27 @@ export default function InfiniteMuseum() {
       viewport.worldWidth = worldW
       viewport.worldHeight = worldH
 
+      // responsive "fitted" zoom: bigger frames on phones, the dense wall on desktop
+      const computeHome = () => {
+        const w = host.clientWidth
+        if (w < 480) return 0.62
+        if (w < 768) return 0.54
+        if (w < 1100) return 0.46
+        return 0.42
+      }
+      let home = computeHome()
+      const centerY = () => MARGIN + host.clientHeight * 0.6
+
       viewport
         .drag()
         .pinch()
         .wheel({ smooth: 3 })
         .decelerate({ friction: 0.93 })
-        .clampZoom({ minScale: 0.18, maxScale: 2.6 })
+        .clampZoom({ minScale: 0.16, maxScale: 3 })
         .clamp({ direction: 'all', underflow: 'center' })
 
-      const home = 0.42
       viewport.setZoom(home, true)
-      viewport.moveCenter(worldW / 2, MARGIN + host.clientHeight * 0.6)
+      viewport.moveCenter(worldW / 2, centerY())
 
       let raf = false
       const updateChrome = () => {
@@ -202,16 +212,24 @@ export default function InfiniteMuseum() {
 
       const onResize = () => {
         viewport.resize(host.clientWidth, host.clientHeight, worldW, worldH)
+        // re-fit on orientation change so frames stay a usable size
+        home = computeHome()
+        viewport.setZoom(home, true)
+        viewport.moveCenter(worldW / 2, centerY())
         onMove()
       }
       window.addEventListener('resize', onResize)
+      window.addEventListener('orientationchange', onResize)
 
       apiRef.current = {
-        cleanupResize: () => window.removeEventListener('resize', onResize),
+        cleanupResize: () => {
+          window.removeEventListener('resize', onResize)
+          window.removeEventListener('orientationchange', onResize)
+        },
         goHome: () => {
           viewport.animate({
             time: 900,
-            position: { x: worldW / 2, y: MARGIN + host.clientHeight * 0.6 },
+            position: { x: worldW / 2, y: centerY() },
             scale: home,
             ease: 'easeInOutSine',
           })
@@ -248,7 +266,7 @@ export default function InfiniteMuseum() {
       <header className="museum__top">
         <Link to="/" className="museum__back">← Lobby</Link>
         <div className="museum__id">
-          <span className="museum__id-num">Wireframe 02</span>
+          <span className="museum__id-num">Jariana Digital Museum · Gallery II</span>
           <span className="museum__id-name">The Infinite Museum</span>
         </div>
         <div className="museum__count">
@@ -270,7 +288,7 @@ export default function InfiniteMuseum() {
       <aside className={`museum__placard ${focused ? 'is-open' : ''}`} aria-hidden={!focused}>
         {focused && (
           <>
-            <p className="museum__placard-eyebrow">JARIANA · Permanent Collection</p>
+            <p className="museum__placard-eyebrow">Jariana Digital Museum · Placeholder Collection</p>
             <h2 className="museum__placard-title">{focused.title}</h2>
             <p className="museum__placard-meta">{seasonLabel(focused)}</p>
             <p className="museum__placard-line">Promotional still on broadcast emulsion</p>

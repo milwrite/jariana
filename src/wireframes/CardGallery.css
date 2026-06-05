@@ -194,6 +194,10 @@
     grid-template-areas: 'back' 'title' 'note';
   }
   .cards__note { justify-self: start; text-align: left; }
+  /* stack the feature placard instead of floating the accession no. */
+  .plate--feature .plate__placard { display: block; }
+  .plate--feature .plate__acc { margin-top: 0.45rem; }
+  .plate--feature .plate__frame--feature img { height: clamp(16rem, 50vh, 26rem); }
 }
 @media (max-width: 440px) { .masonry { column-count: 1; } }
 
