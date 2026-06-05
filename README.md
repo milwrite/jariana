@@ -1,6 +1,6 @@
-# Jariana Digital Museum
+# Jariana Skibidi Museum
 
-A small private digital museum for **Jackson and Ariana** (*JARIANA* = Jackson + Ariana),
+A small private Skibidi museum for **Jackson and Ariana** (*JARIANA* = Jackson + Ariana),
 shipped as two minimalist galleries — both working hi-fi prototypes you can click through,
 responsive down to phone screens (touch pan/zoom on the infinite canvas).
 
